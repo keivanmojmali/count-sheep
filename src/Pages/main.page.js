@@ -32,25 +32,31 @@ export default class MainPage extends React.Component {
 
         //try catch block to make sure that the input is actually json
         //if not - it will clear state and alert user to retry
-          try {  
-            const testJSON = JSON.parse(jsonStr);  
-          } catch (e) {  
+        //   if {  
+        //     const testJSON = JSON.parse(jsonStr);  
+        //   } catch (e) {  
+        //     this.setState({waiting:'no',json:''})
+        //      window.alert('Please enter valid JSON file')
+        //   }
+
+          if(!JSON.parse(jsonStr)){
             this.setState({waiting:'no',json:''})
-             window.alert('Please enter valid JSON file')
+            window.alert('Please enter valid JSON file');
+            return;
           }
 
         const parsedJSON = JSON.parse(jsonStr);  
-
+          console.log(parsedJSON);
 
         //below will check to see if the values we need in the json are present
         if(!parsedJSON.available){
             this.setState({waiting:'no',json:''})
-            window.alert('Please enter valid JSON file')
+            window.alert('Please enter valid JSON file with available property')
             return;
         }
         if(!parsedJSON.missing){
             this.setState({waiting:'no',json:''})
-            window.alert('Please enter valid JSON file')
+            window.alert('Please enter valid JSON file with missing property')
             return;
         }
 
